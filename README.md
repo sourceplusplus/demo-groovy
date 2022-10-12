@@ -22,13 +22,6 @@ Once the plugin is installed, check out the demos below. Each demo contains inst
 
 ## Demos
 
-### [Add Breakpoint](./src/main/groovy/spp/demo/command/AddBreakpoint.groovy)
-
-This demonstration shows how to add a "non-breaking breakpoint" to a running application. The **Add Breakpoint** command
-is useful for debugging production applications without impacting the end user.
-
-For more information, see the [AddBreakpoint](./src/main/groovy/spp/demo/command/AddBreakpoint.groovy) class.
-
 ### [Tail Logs](./src/main/groovy/spp/demo/command/TailLogs.groovy)
 
 This demonstration shows how to tail logs from a running application. Logs can be filtered by individual statements,
