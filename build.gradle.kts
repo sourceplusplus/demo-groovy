@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.apache.groovy:groovy:4.0.2")
+    implementation("org.codehaus.groovy:groovy:3.0.13")
 
     //attaches Source++ probe to the application
     javaagent("plus.sourceplus.probe:probe-jvm:0.7.3")
@@ -25,7 +25,7 @@ dependencies {
 
     //used for endpoint indicators
     implementation("io.micronaut:micronaut-http-server-netty:3.6.4")
-    annotationProcessor("io.micronaut:micronaut-inject-java:3.6.4")
+    implementation("io.micronaut:micronaut-inject-groovy:3.6.4")
 }
 
 application {
