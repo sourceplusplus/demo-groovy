@@ -24,10 +24,7 @@ class SlowEndpoint {
      */
     @Get("/slow-2000ms")
     HttpResponse<Void> slow2000ms() {
-        try {
-            Thread.sleep(2000)
-        } catch (InterruptedException ignore) {
-        }
+        Thread.sleep(2000)
         return HttpResponse.ok()
     }
 
@@ -36,10 +33,7 @@ class SlowEndpoint {
      */
     @Get("/slow-1000ms")
     HttpResponse<Void> slow1000ms() {
-        try {
-            Thread.sleep(1000)
-        } catch (InterruptedException ignore) {
-        }
+        Thread.sleep(1000)
         return HttpResponse.ok()
     }
 }
