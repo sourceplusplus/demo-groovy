@@ -29,7 +29,9 @@ class Main {
     }
 
     static void triggerAddBreakpoint() {
-        new AddBreakpoint().simpleBreakpoint()
+        AddBreakpoint addBreakpoint = new AddBreakpoint()
+        addBreakpoint.simpleBreakpoint()
+        addBreakpoint.breakpointWithRedactedData()
     }
 
     static void triggerAddLog() {
