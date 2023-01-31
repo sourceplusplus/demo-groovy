@@ -48,6 +48,12 @@ class Main {
     }
 
     static void triggerEndpoints() {
+        //view activity command
+        callEndpoint("/command/view-activity")
+
+        //view traces command
+        callEndpoint("/command/view-traces")
+
         //failing endpoint indicator
         callEndpoint("/indicator/fail-100-percent")
         callEndpoint("/indicator/fail-50-percent")
