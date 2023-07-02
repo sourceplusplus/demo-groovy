@@ -14,6 +14,7 @@ repositories {
 
 dependencies {
     implementation("org.codehaus.groovy:groovy:3.0.13")
+    implementation("io.micronaut:micronaut-management:3.6.4")
 
     //attaches Source++ probe to the application
     javaagent("plus.sourceplus.probe:probe-jvm:0.7.9-SNAPSHOT")
