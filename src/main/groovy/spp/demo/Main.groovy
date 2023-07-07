@@ -1,5 +1,6 @@
 package spp.demo
 
+import com.codahale.metrics.ConsoleReporter
 import com.codahale.metrics.MetricRegistry
 import com.codahale.metrics.Timer
 import io.micronaut.runtime.Micronaut
@@ -18,9 +19,16 @@ class Main {
     static void main(String[] args) throws Exception {
         Micronaut.run(Main.class, args)
 
+        ConsoleReporter reporter = ConsoleReporter.forRegistry(metricRegistry).build();
+
         while (true) {
             executeDemos()
             Thread.sleep(1000)
+
+            reporter.report();
+
+            int threadCount = Thread.activeCount();
+            System.out.println("Thread count: " + threadCount);
         }
     }
 
