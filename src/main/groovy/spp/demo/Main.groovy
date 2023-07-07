@@ -1,5 +1,7 @@
 package spp.demo
 
+import com.codahale.metrics.MetricRegistry
+import com.codahale.metrics.Timer
 import io.micronaut.runtime.Micronaut
 import spp.demo.command.AddBreakpoint
 import spp.demo.command.AddLog
@@ -11,6 +13,7 @@ import java.util.concurrent.Executors
 class Main {
 
     private static final Executor executor = Executors.newCachedThreadPool()
+    private static final MetricRegistry metricRegistry = new MetricRegistry()
 
     static void main(String[] args) throws Exception {
         Micronaut.run(Main.class, args)
@@ -72,10 +75,27 @@ class Main {
     }
 
     private static void callEndpoint(String endpoint) {
+        Timer.Context timer = metricRegistry.timer(endpoint).time()
+        URL url
+        try {
+            url = new URL("http://localhost:8080" + endpoint)
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e)
+        }
+
         executor.execute(() -> {
+            HttpURLConnection connection = null
             try {
-                new URL("http://localhost:8080" + endpoint).openStream().close()
+                connection = (HttpURLConnection) url.openConnection()
+                connection.setConnectTimeout(5000)
+                connection.setReadTimeout(5000)
+                connection.getResponseCode()
             } catch (Exception ignore) {
+            } finally {
+                if (connection != null) {
+                    connection.disconnect()
+                }
+                timer.close()
             }
         })
     }
