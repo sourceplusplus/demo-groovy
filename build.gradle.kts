@@ -14,7 +14,6 @@ repositories {
 }
 
 dependencies {
-    implementation("io.dropwizard.metrics:metrics-core:4.2.19")
     implementation("org.codehaus.groovy:groovy:3.0.13")
     implementation("io.micronaut:micronaut-management:3.6.4")
 

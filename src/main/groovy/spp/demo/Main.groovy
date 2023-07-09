@@ -1,8 +1,5 @@
 package spp.demo
 
-import com.codahale.metrics.ConsoleReporter
-import com.codahale.metrics.MetricRegistry
-import com.codahale.metrics.Timer
 import io.micronaut.runtime.Micronaut
 import spp.demo.command.AddBreakpoint
 import spp.demo.command.AddLog
@@ -14,21 +11,13 @@ import java.util.concurrent.Executors
 class Main {
 
     private static final Executor executor = Executors.newCachedThreadPool()
-    private static final MetricRegistry metricRegistry = new MetricRegistry()
 
     static void main(String[] args) throws Exception {
         Micronaut.run(Main.class, args)
 
-        ConsoleReporter reporter = ConsoleReporter.forRegistry(metricRegistry).build();
-
         while (true) {
             executeDemos()
             Thread.sleep(1000)
-
-            reporter.report();
-
-            int threadCount = Thread.activeCount();
-            System.out.println("Thread count: " + threadCount);
         }
     }
 
@@ -83,7 +72,6 @@ class Main {
     }
 
     private static void callEndpoint(String endpoint) {
-        Timer.Context timer = metricRegistry.timer(endpoint).time()
         URL url
         try {
             url = new URL("http://localhost:8080" + endpoint)
@@ -103,7 +91,6 @@ class Main {
                 if (connection != null) {
                     connection.disconnect()
                 }
-                timer.close()
             }
         })
     }
